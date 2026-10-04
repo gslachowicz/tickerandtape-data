@@ -1,0 +1,130 @@
+name: Update data
+
+# Builds tickerandtape.com from the private code repository and publishes it with GitHub Pages.
+# CODE_TOKEN: fine-grained token with read-only access (Contents) to gslachowicz/fundamental-technical-charts.
+
+on:
+  schedule:
+    # Monday–Friday 22:20 UTC (after the US close, both in summer and winter time)
+    - cron: "20 22 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      fund_batch:
+        description: "Fundamentals to refresh in this run (250 = daily rotation; 3000 = load everything now)"
+        default: "250"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+      INK_FUND_BATCH: ${{ inputs.fund_batch || '250' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: gslachowicz/fundamental-technical-charts
+          token: ${{ secrets.CODE_TOKEN }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      # Keeps the last good data between runs, so a bad day at Yahoo never empties the site
+      - uses: actions/cache/restore@v4
+        id: cache
+        with:
+          path: cache
+          key: ink-cache-${{ github.run_id }}
+          restore-keys: ink-cache-
+
+      - name: Build data from Yahoo Finance
+        run: python scripts/build_data.py
+
+      # macro calendar (BLS, BEA, Census, Fed) and the Fed rate odds from fed funds futures; a failure never blocks the deploy
+      - name: Macro calendar and Fed odds
+        continue-on-error: true
+        timeout-minutes: 8
+        run: python scripts/macro.py --out site/data/macro.json --cache cache
+
+      # superinvestors: the 13F portfolios of well-known funds (SEC EDGAR); a failure never blocks the deploy
+      - name: Superinvestors (13F)
+        continue-on-error: true
+        timeout-minutes: 20
+        env:
+          OPENFIGI_KEY: ${{ secrets.OPENFIGI_KEY }}
+        run: python scripts/superinvestors.py --out site/data/si --cache cache --uni site/data/universe.json
+
+      # insider buying and selling: open-market trades from the SEC Form 4 filings; a failure never blocks the deploy
+      # minutes are free in this public repository, so the backlog of filings gets far more time each night
+      - name: Insider trades (Form 4)
+        continue-on-error: true
+        timeout-minutes: 100
+        env:
+          INS_BUDGET: "5400"
+        run: python scripts/insiders.py --out site/data/insiders --cache cache --uni site/data/universe.json
+
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: cache
+          key: ink-cache-${{ github.run_id }}
+
+      # screenshots of each tool for the rotating showcase on the welcome page (a failure never blocks the deploy)
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Screenshots for the welcome page
+        continue-on-error: true
+        timeout-minutes: 12
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.48.2 sharp@0.33.5
+          npx playwright install --with-deps chromium
+          (cd site && python -m http.server 8000 >/dev/null 2>&1 &)
+          sleep 2
+          node scripts/showcase.mjs site http://127.0.0.1:8000
+
+      # the user manual: screenshots of every tool in English, Spanish and Portuguese and the PDFs (a failure never blocks the deploy)
+      - name: User manual screenshots and PDF
+        continue-on-error: true
+        timeout-minutes: 20
+        run: |
+          (cd site && python -m http.server 8001 >/dev/null 2>&1 &)
+          sleep 2
+          node scripts/manual.mjs site http://127.0.0.1:8001
+
+      # the published app code is compressed and its names shortened, so it is hard to read and reuse
+      # (the readable source stays in this private repository); a failure publishes the readable files
+      - name: Compress the site code
+        continue-on-error: true
+        run: |
+          npm install --no-save --no-audit --no-fund terser@5.31.6
+          for f in app i18n; do npx terser "site/$f.js" -c passes=2 -m --comments '/^!/' -o "site/$f.min.js" && mv "site/$f.min.js" "site/$f.js"; done
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

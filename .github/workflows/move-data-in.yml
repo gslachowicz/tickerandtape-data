@@ -1,0 +1,45 @@
+name: Move data in
+
+# One-off: copies the live prices and the research reports from the code repository's "live" and "research"
+# branches to this repository, and points the research index at the new copies.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  move:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CODE_TOKEN: ${{ secrets.CODE_TOKEN }}
+    steps:
+      - name: Copy the branches
+        run: |
+          set -e
+          [ -n "$CODE_TOKEN" ] || { echo "CODE_TOKEN is missing"; exit 1; }
+          DEST="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          SRC="https://x-access-token:${CODE_TOKEN}@github.com/gslachowicz/fundamental-technical-charts.git"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # live prices: one file
+          git clone -q --depth 1 --branch live "$SRC" live && cd live && rm -rf .git && git init -q -b live && git add -A && git commit -q -m "Live prices" && git push -q -f "$DEST" live && cd ..
+          # research: every report, then the index rewritten to the new location
+          git clone -q --branch research "$SRC" research && cd research && rm -rf .git && git init -q -b research
+          git add -A && git commit -q -m "Research reports (moved)" && git push -q -f "$DEST" research
+          SHA=$(git rev-parse HEAD)
+          python3 - "$SHA" <<'PY'
+          import json, re, sys
+          from pathlib import Path
+          sha = sys.argv[1]
+          idx = json.loads(Path("index.json").read_text())
+          for r in idx.get("reports", []):
+              for k in ("pdf", "cover"):
+                  if r.get(k):
+                      r[k] = re.sub(r"^https://cdn\.jsdelivr\.net/gh/[^/]+/[^@/]+@[^/]+/", f"https://cdn.jsdelivr.net/gh/gslachowicz/tickerandtape-data@{sha}/", r[k])
+          Path("index.json").write_text(json.dumps(idx, indent=1))
+          print(len(idx.get("reports", [])), "reports")
+          PY
+          git add index.json && git commit -q -m "Research index: new location" && git push -q "$DEST" research
+          echo "done"
