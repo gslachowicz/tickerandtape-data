@@ -1,0 +1,50 @@
+name: Extended hours
+
+on:
+  schedule:
+    # every 15 minutes outside the US session, Monday–Friday (UTC). The script checks New York time and does nothing
+    # outside 4:00–9:30 (pre-market) and 16:00–20:00 (after hours), so these hours cover summer and winter time.
+    - cron: "*/15 8-14 * * 1-5"
+    - cron: "*/15 20-23 * * 1-5"
+    - cron: "*/15 0-1 * * 2-6"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ext
+  cancel-in-progress: true
+
+jobs:
+  quotes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: gslachowicz/fundamental-technical-charts
+          token: ${{ secrets.CODE_TOKEN }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Fetch pre-market / after-hours prices
+        run: python scripts/ext_prices.py ext.json
+
+      # ext.json goes to the "ext" branch of this repository (one commit, replaced every time)
+      - name: Publish to the ext branch
+        if: hashFiles('ext.json') != ''
+        run: |
+          mkdir pub && mv ext.json pub/ && cd pub
+          git init -q -b ext
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ext.json
+          git commit -q -m "Extended-hours prices"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ext
