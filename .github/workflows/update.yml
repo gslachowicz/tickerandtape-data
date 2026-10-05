@@ -114,6 +114,15 @@ jobs:
           npm install --no-save --no-audit --no-fund terser@5.31.6
           for f in app i18n; do npx terser "site/$f.js" -c passes=2 -m --comments '/^!/' -o "site/$f.min.js" && mv "site/$f.min.js" "site/$f.js"; done
 
+      # safety check: the data and the main screens must work, or the deploy stops and the site keeps its previous version
+      - name: Safety check before publishing
+        timeout-minutes: 10
+        run: |
+          [ -d node_modules/playwright ] || { npm install --no-save --no-audit --no-fund playwright@1.48.2 && npx playwright install --with-deps chromium; }
+          (cd site && python -m http.server 8002 >/dev/null 2>&1 &)
+          sleep 2
+          node scripts/smoke.mjs site http://127.0.0.1:8002
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
