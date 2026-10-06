@@ -1,6 +1,19 @@
 {
  "reports": [
   {
+   "kind": "daily",
+   "date": "2026-10-06",
+   "no": 1,
+   "title": "The Daily Tape \u00b7 Tuesday, October 6, 2026",
+   "summary": [
+    "The Nasdaq is in a rally attempt: wait for a follow-through day before buying aggressively.",
+    "S&P 500 futures are up 0.4% before the open.",
+    "Materials led yesterday (+1.3%) and Real Estate lagged (-0.3%)."
+   ],
+   "pdf": "https://cdn.jsdelivr.net/gh/gslachowicz/tickerandtape-data@b6d0ee573d07c0a46e814858a2b7edbfb3512b87/daily/2026-10-06.pdf",
+   "cover": "https://cdn.jsdelivr.net/gh/gslachowicz/tickerandtape-data@b6d0ee573d07c0a46e814858a2b7edbfb3512b87/daily/2026-10-06.png"
+  },
+  {
    "kind": "weekly",
    "date": "2026-10-03",
    "no": 1,
