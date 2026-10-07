@@ -123,6 +123,31 @@ jobs:
           sleep 2
           node scripts/smoke.mjs site http://127.0.0.1:8002
 
+      # speed check: Lighthouse (phone, slow 4G) on the welcome page and a chart, with compression like GitHub Pages.
+      # The scores go to the run's summary; below 80 it leaves a warning, but it never stops the deploy.
+      - name: Lighthouse scores
+        continue-on-error: true
+        timeout-minutes: 8
+        run: |
+          (npx --yes serve@14 -l 8003 site >/dev/null 2>&1 &)
+          sleep 4
+          export CHROME_PATH=$(node -e "console.log(require('playwright').chromium.executablePath())")
+          echo "## Lighthouse (phone)" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Page | Performance | Accessibility | Best practices | SEO | LCP | CLS | TBT |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|---|---|---|---|---|---|---|---|" >> "$GITHUB_STEP_SUMMARY"
+          for page in welcome/ chart/NVDA/; do
+            npx --yes lighthouse@12 "http://localhost:8003/$page" --quiet --chrome-flags="--headless=new --no-sandbox" \
+              --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=lh.json || continue
+            python - "$page" <<'PY'
+          import json, os, sys
+          d = json.load(open("lh.json")); c = d["categories"]; a = d["audits"]
+          sc = {k: round((v["score"] or 0) * 100) for k, v in c.items()}
+          row = f"| /{sys.argv[1]} | {sc['performance']} | {sc['accessibility']} | {sc['best-practices']} | {sc['seo']} | {a['largest-contentful-paint']['displayValue']} | {a['cumulative-layout-shift']['displayValue']} | {a['total-blocking-time']['displayValue']} |"
+          open(os.environ["GITHUB_STEP_SUMMARY"], "a").write(row + "\n")
+          if sc["performance"] < 80: print(f"::warning::Lighthouse performance {sc['performance']} on /{sys.argv[1]}")
+          PY
+          done
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
