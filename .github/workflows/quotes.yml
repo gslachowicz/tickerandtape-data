@@ -1,0 +1,46 @@
+name: Quotes
+
+# Prices every minute: scripts/quotes_loop.py runs for about 55 minutes and publishes live.json (branch "live") and,
+# in pre-market and after hours, ext.json (branch "ext") every minute. The next run waits in line (concurrency group
+# below), so it starts as soon as this one ends. The API Worker starts runs every 10 minutes when fewer than two are
+# there (Sunday 6 pm to Friday 8:30 pm New York); the schedule below is the backup.
+on:
+  schedule:
+    - cron: "7,37 * * * 0-5"
+  workflow_dispatch:
+    inputs:
+      minutes:
+        description: "How long this run publishes prices (minutes)"
+        default: "55"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: quotes
+  cancel-in-progress: false
+
+jobs:
+  quotes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: gslachowicz/fundamental-technical-charts
+          token: ${{ secrets.CODE_TOKEN }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Publish prices every minute
+        env:
+          LOOP_MINUTES: ${{ inputs.minutes || '55' }}
+          PUSH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: python scripts/quotes_loop.py
