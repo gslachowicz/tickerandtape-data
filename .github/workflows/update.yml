@@ -12,6 +12,10 @@ on:
       fund_batch:
         description: "Fundamentals to refresh in this run (250 = daily rotation; 3000 = load everything now)"
         default: "250"
+  # a push to main of the code repository writes its commit into .publish (its "Publish on push" workflow): build it now
+  push:
+    branches: [main]
+    paths: [".publish"]
 
 permissions:
   contents: read
