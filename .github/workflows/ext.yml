@@ -1,13 +1,13 @@
 name: Extended hours
 
+# Replaced by the Quotes workflow (prices every minute). Kept to run by hand with force = yes; runs started without it
+# (an older API Worker) do nothing, so they never overwrite the newer prices.
 on:
-  schedule:
-    # every 15 minutes outside the US session, Monday–Friday (UTC). The script checks New York time and does nothing
-    # outside 4:00–9:30 (pre-market) and 16:00–20:00 (after hours), so these hours cover summer and winter time.
-    - cron: "*/15 8-14 * * 1-5"
-    - cron: "*/15 20-23 * * 1-5"
-    - cron: "*/15 0-1 * * 2-6"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run anyway (yes)"
+        default: "no"
 
 permissions:
   contents: write
@@ -18,6 +18,7 @@ concurrency:
 
 jobs:
   quotes:
+    if: inputs.force == 'yes'
     runs-on: ubuntu-latest
     timeout-minutes: 14
     steps:
