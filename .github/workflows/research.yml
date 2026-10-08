@@ -6,7 +6,7 @@ name: Research reports
 # jsDelivr, so publishing never rebuilds the site. The site code lives in a private repository.
 on:
   schedule:
-    - cron: "15 12 * * 1-5"   # Daily: 8:15 a.m. New York in summer time (7:15 a.m. in winter), before the open
+    - cron: "30 12 * * 1-5"   # Daily: 9:30 a.m. Buenos Aires (12:30 UTC; 8:30 a.m. New York in summer time, 7:30 in winter), before the open
     - cron: "0 14 * * 6"      # Weekly: Saturday 10:00 a.m. New York (9:00 a.m. in winter)
   workflow_dispatch:
     inputs:
