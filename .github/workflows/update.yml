@@ -40,6 +40,18 @@ jobs:
           token: ${{ secrets.CODE_TOKEN }}
           persist-credentials: false
 
+      # marks this code commit as taken, so "Watch code" does not start a second build for it
+      - name: Mark the code commit as built
+        id: codesha
+        run: |
+          mkdir -p .codemark && git rev-parse HEAD > .codemark/sha
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache/save@v4
+        continue-on-error: true
+        with:
+          path: .codemark
+          key: code-built-${{ steps.codesha.outputs.sha }}
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"

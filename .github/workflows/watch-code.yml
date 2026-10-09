@@ -1,0 +1,57 @@
+name: Watch code
+
+# Publishes code changes without any token in the code repository: every 10 minutes this looks at the latest commit on
+# main of gslachowicz/fundamental-technical-charts (with CODE_TOKEN, the same read-only token "Update data" uses) and,
+# if "Update data" has not built it yet, starts it. During the US session it waits, so the site never changes while the
+# market is open; just before the nightly run it also waits, since that run takes the latest code anyway.
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: watch-code
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Latest code commit
+        id: code
+        env:
+          CODE_TOKEN: ${{ secrets.CODE_TOKEN }}
+        run: |
+          H=$(TZ=America/New_York date +%H%M); D=$(TZ=America/New_York date +%u); U=$(date -u +%H%M)
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$D" -le 5 ]; then
+            if [ "$H" -ge 0915 ] && [ "$H" -lt 1615 ]; then echo "US session ($H New York): new code waits."; exit 0; fi
+            if [ "$U" -ge 2150 ] && [ "$U" -lt 2230 ]; then echo "The nightly update is about to run with the latest code."; exit 0; fi
+          fi
+          SHA=$(git ls-remote "https://x-access-token:${CODE_TOKEN}@github.com/gslachowicz/fundamental-technical-charts.git" refs/heads/main | cut -f1)
+          [ -n "$SHA" ] || { echo "::error::Could not read the code repository (check CODE_TOKEN)"; exit 1; }
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Already built?
+        id: built
+        if: steps.code.outputs.sha != ''
+        uses: actions/cache/restore@v4
+        with:
+          path: .codemark
+          key: code-built-${{ steps.code.outputs.sha }}
+          lookup-only: true
+
+      - name: Start Update data
+        if: steps.code.outputs.sha != '' && steps.built.outputs.cache-hit != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ steps.code.outputs.sha }}
+        run: |
+          busy=$(gh run list -R "$GITHUB_REPOSITORY" -w update.yml -L 10 --json status --jq '[.[] | select(.status != "completed")] | length')
+          if [ "$busy" -gt 0 ]; then echo "Update data is already running; checking again in 10 minutes."; exit 0; fi
+          gh workflow run update.yml -R "$GITHUB_REPOSITORY"
+          echo "New code ${SHA::7}: Update data started." | tee -a "$GITHUB_STEP_SUMMARY"
