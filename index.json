@@ -1,6 +1,19 @@
 {
  "reports": [
   {
+   "kind": "weekly",
+   "date": "2026-10-10",
+   "no": 2,
+   "title": "The Weekly Tape \u00b7 Week of October 5 \u2013 October 9, 2026",
+   "summary": [
+    "The Nasdaq ends the week in a rally attempt: wait for a follow-through day before buying aggressively.",
+    "SPY +1.2% and QQQ +0.2% on the week.",
+    "The average stock beat the index: RSP +1.6% vs SPY +1.2%."
+   ],
+   "pdf": "https://cdn.jsdelivr.net/gh/gslachowicz/tickerandtape-data@64a162f41452df4400740f201947b894a6726e4e/weekly/2026-10-10.pdf",
+   "cover": "https://cdn.jsdelivr.net/gh/gslachowicz/tickerandtape-data@64a162f41452df4400740f201947b894a6726e4e/weekly/2026-10-10.png"
+  },
+  {
    "kind": "daily",
    "date": "2026-10-09",
    "no": 4,
