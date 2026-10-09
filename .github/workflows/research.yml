@@ -27,7 +27,7 @@ concurrency:
 jobs:
   report:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
         with:
@@ -72,6 +72,8 @@ jobs:
           set +e; python scripts/research.py $ARGS; code=$?; set -e
           if [ $code = 2 ]; then echo "skip=1" >> "$GITHUB_OUTPUT"; exit 0; fi
           [ $code = 0 ] || exit $code
+          # the charts, maps and gauges exactly as on the platform (house look); a picture that fails is drawn by the report instead
+          timeout 600 node scripts/research_shots.mjs build/research/shots.json build/research/shots https://tickerandtape.com || echo "platform pictures skipped"
           node scripts/research_pdf.mjs build/research/report.html build/research/report.pdf build/research/cover.png
 
       - name: Publish
