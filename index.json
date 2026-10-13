@@ -2,6 +2,19 @@
  "reports": [
   {
    "kind": "daily",
+   "date": "2026-10-13",
+   "no": 6,
+   "title": "The Daily Tape \u00b7 Tuesday, October 13, 2026",
+   "summary": [
+    "The Nasdaq is in a rally attempt: wait for a follow-through day before buying aggressively.",
+    "S&P 500 futures are down 0.1% before the open.",
+    "Energy led yesterday (+1.4%) and Technology lagged (-1.2%)."
+   ],
+   "pdf": "https://cdn.jsdelivr.net/gh/gslachowicz/tickerandtape-data@7cf30a8de8b0a51f791b6afd43e5e997c9650181/daily/2026-10-13.pdf",
+   "cover": "https://cdn.jsdelivr.net/gh/gslachowicz/tickerandtape-data@7cf30a8de8b0a51f791b6afd43e5e997c9650181/daily/2026-10-13.png"
+  },
+  {
+   "kind": "daily",
    "date": "2026-10-12",
    "no": 5,
    "title": "The Daily Tape \u00b7 Monday, October 12, 2026",
