@@ -2,6 +2,19 @@
  "reports": [
   {
    "kind": "daily",
+   "date": "2026-10-14",
+   "no": 7,
+   "title": "The Daily Tape \u00b7 Wednesday, October 14, 2026",
+   "summary": [
+    "The Nasdaq is in a rally attempt: wait for a follow-through day before buying aggressively.",
+    "S&P 500 futures are up 0.2% before the open.",
+    "On the macro calendar today: CPI inflation at 8:30 a.m. ET."
+   ],
+   "pdf": "https://cdn.jsdelivr.net/gh/gslachowicz/tickerandtape-data@e50d4735b35ee6f69af4617bdf42ab0701918c7f/daily/2026-10-14.pdf",
+   "cover": "https://cdn.jsdelivr.net/gh/gslachowicz/tickerandtape-data@e50d4735b35ee6f69af4617bdf42ab0701918c7f/daily/2026-10-14.png"
+  },
+  {
+   "kind": "daily",
    "date": "2026-10-13",
    "no": 6,
    "title": "The Daily Tape \u00b7 Tuesday, October 13, 2026",
