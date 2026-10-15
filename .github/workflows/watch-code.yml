@@ -51,7 +51,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           SHA: ${{ steps.code.outputs.sha }}
         run: |
-          busy=$(gh run list -R "$GITHUB_REPOSITORY" -w update.yml -L 10 --json status --jq '[.[] | select(.status != "completed")] | length')
-          if [ "$busy" -gt 0 ]; then echo "Update data is already running; checking again in 10 minutes."; exit 0; fi
-          gh workflow run update.yml -R "$GITHUB_REPOSITORY"
-          echo "New code ${SHA::7}: Update data started." | tee -a "$GITHUB_STEP_SUMMARY"
+          busy=$(gh run list -R "$GITHUB_REPOSITORY" -w publish-code.yml -L 10 --json status --jq '[.[] | select(.status != "completed")] | length')
+          if [ "$busy" -gt 0 ]; then echo "Publish code is already running; checking again in 10 minutes."; exit 0; fi
+          gh workflow run publish-code.yml -R "$GITHUB_REPOSITORY"
+          echo "New code ${SHA::7}: Publish code started." | tee -a "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,111 @@
+name: Publish code
+
+# Code changes reach tickerandtape.com in a few minutes: the app code from the private repository goes out on top of the
+# site the last full "Update data" built (its data, pages and pictures are kept in a cache). The pages are written again
+# from the new code; nothing is downloaded. The full update with new data still runs every night.
+# Started by a push of .publish (the code repository's "Publish on push"), by "Watch code", or by hand.
+on:
+  push:
+    branches: [main]
+    paths: [".publish"]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  actions: write
+
+concurrency:
+  group: publish-code
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      # the last full build's site first, then the new code on top of it
+      - name: The last built site
+        id: site
+        uses: actions/cache/restore@v4
+        with:
+          path: site
+          key: site-built-none
+          restore-keys: site-built-
+
+      - name: No built site yet
+        if: steps.site.outputs.cache-matched-key == ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "::notice::No built site in the cache yet: starting the full Update data instead."
+          gh workflow run update.yml -R "$GITHUB_REPOSITORY"
+          exit 1
+
+      - uses: actions/checkout@v4
+        with:
+          repository: gslachowicz/fundamental-technical-charts
+          token: ${{ secrets.CODE_TOKEN }}
+          persist-credentials: false
+          path: code
+
+      - name: Mark the code commit as built
+        id: codesha
+        run: |
+          mkdir -p .codemark && git -C code rev-parse HEAD > .codemark/sha
+          echo "sha=$(cat .codemark/sha)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache/save@v4
+        continue-on-error: true
+        with:
+          path: .codemark
+          key: code-built-${{ steps.codesha.outputs.sha }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: code/requirements.txt
+      - run: pip install -r code/requirements.txt
+
+      - name: The new code on top of the built site
+        run: |
+          (cd code && git ls-files site) | while read -r f; do mkdir -p "$(dirname "$f")"; cp "code/$f" "$f"; done
+          python code/scripts/build_data.py --pages-only --out site/data
+          echo "Code ${{ steps.codesha.outputs.sha }} on top of ${{ steps.site.outputs.cache-matched-key }}" >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Compress the site code
+        continue-on-error: true
+        run: |
+          npm install --no-save --no-audit --no-fund terser@5.31.6
+          for f in app i18n; do npx terser "site/$f.js" -c passes=2 -m --comments '/^!/' -o "site/$f.min.js" && mv "site/$f.min.js" "site/$f.js"; done
+
+      # the same safety check as the full build: the main screens must work, or the site keeps its previous version
+      - name: Safety check before publishing
+        timeout-minutes: 8
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.48.2 && npx playwright install --with-deps chromium
+          (cd site && python -m http.server 8002 >/dev/null 2>&1 &)
+          sleep 2
+          node code/scripts/smoke.mjs site http://127.0.0.1:8002
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -12,10 +12,7 @@ on:
       fund_batch:
         description: "Fundamentals to refresh in this run (250 = daily rotation; 3000 = load everything now)"
         default: "250"
-  # a push to main of the code repository writes its commit into .publish (its "Publish on push" workflow): build it now
-  push:
-    branches: [main]
-    paths: [".publish"]
+  # code pushes are published by "Publish code" in a few minutes (no new data); this full build runs every night
 
 permissions:
   contents: read
@@ -122,6 +119,30 @@ jobs:
           sleep 2
           node scripts/manual.mjs site http://127.0.0.1:8001
 
+      # the code may have moved on while the data was being built (this takes ~40 minutes): the site goes out with the
+      # latest code, so a full build never puts back an older app over a newer "Publish code"
+      - name: Bring the site code up to the latest commit
+        env:
+          CODE_TOKEN: ${{ secrets.CODE_TOKEN }}
+        run: |
+          git clone -q --depth 1 "https://x-access-token:${CODE_TOKEN}@github.com/gslachowicz/fundamental-technical-charts.git" /tmp/latest
+          (cd /tmp/latest && git ls-files site) | while read -r f; do mkdir -p "$(dirname "$f")"; cp "/tmp/latest/$f" "$f"; done
+          python /tmp/latest/scripts/build_data.py --pages-only --out site/data
+          mkdir -p .codemark && (cd /tmp/latest && git rev-parse HEAD) > .codemark/sha
+          echo "sha=$(cat .codemark/sha)" >> "$GITHUB_ENV"
+      - uses: actions/cache/save@v4
+        continue-on-error: true
+        with:
+          path: .codemark
+          key: code-built-${{ env.sha }}
+
+      # the built site (data, pages, pictures) for "Publish code", which publishes code changes on top of it in minutes
+      - uses: actions/cache/save@v4
+        continue-on-error: true
+        with:
+          path: site
+          key: site-built-${{ github.run_id }}
+
       # the published app code is compressed and its names shortened, so it is hard to read and reuse
       # (the readable source stays in this private repository); a failure publishes the readable files
       - name: Compress the site code
@@ -172,6 +193,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
