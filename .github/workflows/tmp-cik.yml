@@ -1,0 +1,41 @@
+name: tmp CIK lookup
+on: workflow_dispatch
+jobs:
+  look:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          cat > l.py <<'PY'
+          import requests, time, json, re
+          H={"User-Agent":"Ticker&Tape research contacto@tickerandtape.com"}
+          Q=[("ABI","Abrams Bison"),("AKO","AKO Capital"),("AIM","Atlantic Investment Management"),("AP","AltaRock Partners"),
+          ("VAN","Van Den Berg Management"),("VAN","Century Management"),("GFT","Gates Foundation Trust"),("LMM","Miller Value Partners"),("fairx","Fairholme"),
+          ("OCL","Oakcliff Capital"),("SA","Semper Augustus"),("DAV","Davis Selected Advisers"),("CAS","CAS Investment Partners"),("abc","Abrams Capital Management"),
+          ("GLRE","Greenlight Capital"),("MAVFX","Matrix Asset Advisors"),("WP","Wedgewood Partners"),("SP","ShawSpring"),("DAC","Dodge & Cox"),
+          ("FE","First Eagle Investment"),("FPA","First Pacific Advisors"),("ca","Chou Associates"),("ENG","Engaged Capital"),("GA","Greenhaven Associates"),
+          ("CM","Conifer Management"),("aq","Aquamarine Capital"),("SSHFX","Sound Shore Management"),("DCP","Durable Capital Partners"),("HCM","Hillman Capital"),
+          ("JIM","Jensen Investment Management"),("EC","Egerton Capital"),("AI","Ariel Investments"),("GLC","Greenlea Lane"),("KB","Kahn Brothers"),
+          ("oa","Omega Advisors"),("oa","Omega Family Office"),("LT","Lindsell Train"),("MPF","Mairs & Power"),("MUHL","Muhlenkamp"),("VFC","Valley Forge Capital"),
+          ("PC","Punch Card"),("RVC","RV Capital"),("PTNT","Patient Capital Management"),("TFP","Triple Frond"),("CAU","Causeway Capital"),
+          ("TA","Third Avenue Management"),("YAM","Yacktman"),("VVP","Vulcan Value Partners"),("TB","Tweedy, Browne"),("TB","Tweedy Browne"),("PIM","Pzena Investment"),
+          ("CHE","Check Capital"),("T","Torray"),("cc","Cantillon Capital"),("MP","Makaira Partners"),("DA","Dorsey Asset Management"),
+          ("chk","Pabrai Investment"),("chk","Dalal Street"),("chk","Polen Capital")]
+          for code,q in Q:
+              try:
+                  r=requests.get("https://efts.sec.gov/LATEST/search-index",params={"keysTyped":q},headers=H,timeout=30).json()
+                  hits=r.get("hits",{}).get("hits",[])
+              except Exception as e:
+                  print(code,q,"ERR",e); continue
+              out=[]
+              for h in hits[:8]:
+                  cik=int(h["_id"]); nm=h["_source"].get("entity","")
+                  time.sleep(0.15)
+                  try:
+                      s=requests.get(f"https://data.sec.gov/submissions/CIK{cik:010d}.json",headers=H,timeout=30).json()
+                      f=s["filings"]["recent"]; d=[f["filingDate"][i] for i,fm in enumerate(f["form"]) if fm in("13F-HR","13F-HR/A")]
+                  except Exception: d=[]
+                  if d: out.append(f"{cik}:{nm}:last13F={d[0]}:n={len(d)}")
+              print(code,"|",q,"|"," || ".join(out) or "NONE")
+              time.sleep(0.2)
+          PY
+          python l.py
