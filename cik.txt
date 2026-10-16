@@ -1,0 +1,12 @@
+fairx | Fairholme Capital | 1056831:FAIRHOLME CAPITAL MANAGEMENT LLC:last13F=2026-08-14:n=115
+fairx | Fairholme | NONE
+fairx | Berkowitz | 1056511:BERKOWITZ DAVID P:last13F=2003-05-14:n=37
+GLRE | Greenlight | NONE
+GLRE | Einhorn | NONE
+GLRE | DME Capital | 1489933:DME Capital Management, LP:last13F=2026-08-14:n=10
+oa | Cooperman | 898382:COOPERMAN LEON G:last13F=2026-08-14:n=100
+oa | Omega | 1312794:Omega Bank N.A.:last13F=2008-04-16:n=16
+aq | Aquamarine | 1953324:Aquamarine Zurich AG:last13F=2026-07-10:n=18 || 2104187:Aquamarine Financial (Cayman) Ltd:last13F=2026-08-12:n=4 || 1404599:Aquamarine Capital Management, LLC:last13F=2022-08-02:n=32
+aq | Spier | NONE
+VAN | Century Management | 1753384:Analog Century Management LP:last13F=2026-08-14:n=25 || 1289442:Century Capital Management, LLC:last13F=2017-08-10:n=66 || 1093439:CENTURY CAPITAL MANAGEMENT TRUST:last13F=2009-08-07:n=1
+VAN | Van Den Berg | 1142062:VAN DEN BERG MANAGEMENT I, INC:last13F=2026-08-14:n=109 || 312358:VAN DEN BERG MANAGEMENT INC /TX/                        /ADV:last13F=2002-05-03:n=6
