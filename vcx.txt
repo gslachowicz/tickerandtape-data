@@ -1,0 +1,141 @@
+140/3488
+OABI RS99 28.4 > 8.8 pivot 4.99 forming vdry start 2026-09-02 len 17
+HPE RS98 36.6 > 28.0 > 6.6 pivot 58.92 BO 2026-09-17 vdry start 2026-06-02 len 73
+GTE RS98 26.3 > 8.1 pivot 10.23 BO 2026-10-02 vdry start 2026-08-05 len 38
+CRSR RS97 28.4 > 8.9 pivot 13.63 forming vdry start 2026-08-10 len 47
+ASX RS97 31.6 > 12.1 > 11.3 > 5.8 pivot 45.24 BO 2026-09-29 vdry start 2026-07-02 len 60
+DHX RS97 12.5 > 6.6 pivot 5.13 forming vdry start 2026-09-16 len 21
+DK RS97 20.3 > 8.2 pivot 81.72 forming vdry start 2026-09-18 len 20
+PUBM RS97 15.2 > 8.9 pivot 17.48 BO 2026-09-18 vdry start 2026-08-07 len 22
+TWLO RS96 16.5 > 9.1 pivot 243.98 BO 2026-09-17 vdry start 2026-08-11 len 19
+CAKE RS96 18.3 > 4.9 pivot 111 BO 2026-10-13 vdry start 2026-08-26 len 30
+XP RS96 31.5 > 9.4 > 8.3 pivot 21.57 BO 2026-10-05  start 2026-04-15 len 114
+NTAP RS95 23.0 > 6.8 pivot 199.62 BO 2026-09-25  start 2026-08-13 len 23
+VSXY RS95 30.0 > 11.4 pivot 91.97 forming  start 2026-08-10 len 43
+AMPL RS95 19.0 > 7.5 pivot 13.84 BO 2026-09-30  start 2026-08-28 len 16
+CLDT RS95 9.8 > 4.3 pivot 13.21 BO 2026-09-22  start 2026-08-25 len 15
+FNKO RS95 29.0 > 6.2 pivot 6.62 BO 2026-10-15 vdry start 2026-08-28 len 32
+PCRX RS94 17.6 > 12.1 > 4.7 pivot 25.77 BO 2026-10-08 vdry start 2026-08-04 len 44
+NNBR RS94 19.0 > 10.9 pivot 4.02 BO 2026-10-02  start 2026-08-24 len 24
+OSCR RS94 17.9 > 8.5 pivot 35.01 forming vdry start 2026-09-14 len 24
+PBT RS94 17.0 > 8.6 pivot 36.1 forming  start 2026-09-15 len 23
+ZBRA RS92 11.5 > 7.8 > 6.4 pivot 390.8 forming vdry start 2026-08-12 len 45
+DT RS92 43.0 > 9.6 pivot 54.83 BO 2026-09-15  start 2025-07-29 len 280
+QLYS RS92 26.0 > 7.9 pivot 187 BO 2026-09-30  start 2026-08-05 len 31
+NHC RS92 10.5 > 4.6 pivot 230.09 BO 2026-10-05  start 2026-08-20 len 28
+CVE RS92 11.1 > 6.0 pivot 32.5 BO 2026-10-13  start 2026-09-10 len 19
+ESTC RS92 23.9 > 8.5 pivot 98.6 forming vdry start 2026-08-28 len 33
+SU RS92 11.2 > 6.6 > 3.7 pivot 69.06 BO 2026-09-15  start 2026-07-31 len 25
+XMTR RS92 24.0 > 15.6 > 9.6 pivot 98.71 BO 2026-09-21 vdry start 2026-07-21 len 30
+DGII RS90 23.8 > 11.5 pivot 78.64 forming  start 2026-08-07 len 48
+NEOG RS90 13.2 > 6.0 pivot 12.09 BO 2026-09-15 vdry start 2026-08-03 len 24
+PEB RS90 12.2 > 7.3 > 4.8 pivot 19.5 BO 2026-10-13  start 2026-07-22 len 55
+TGTX RS90 21.2 > 9.7 pivot 56.87 forming vdry start 2026-07-27 len 50
+VCTR RS90 17.9 > 10.2 pivot 116.13 forming vdry start 2026-08-28 len 33
+ALNT RS90 27.6 > 6.5 pivot 114.49 BO 2026-10-02  start 2026-08-11 len 36
+ASC RS90 23.1 > 12.2 > 11.2 pivot 19.37 BO 2026-10-08 vdry start 2026-06-23 len 64
+CRCT RS90 42.4 > 5.6 pivot 6.66 BO 2026-10-15  start 2025-10-02 len 254
+NVAX RS90 32.5 > 15.1 > 7.5 pivot 11.09 BO 2026-10-05  start 2026-06-04 len 79
+KEYS RS89 21.7 > 16.3 > 7.7 pivot 337.53 BO 2026-09-21 vdry start 2026-06-22 len 59
+VTRS RS88 13.6 > 6.5 > 4.0 pivot 17.6 BO 2026-10-09 vdry start 2026-08-06 len 44
+SXC RS88 13.3 > 7.3 pivot 10.02 BO 2026-10-06  start 2026-09-02 len 18
+VBNK RS88 25.0 > 6.1 pivot 22.91 forming  start 2026-06-12 len 82
+DRH RS87 13.1 > 8.6 > 5.5 pivot 12.91 BO 2026-10-13 vdry start 2026-08-03 len 46
+CMTV RS87 10.9 > 7.1 > 5.6 pivot 43.95 forming vdry start 2026-08-13 len 44
+BTSG RS86 25.6 > 8.1 pivot 65.64 forming vdry start 2026-07-27 len 58
+MSM RS86 9.8 > 7.9 > 4.3 > 3.7 pivot 132.33 BO 2026-10-14  start 2026-08-05 len 48
+BP RS86 22.1 > 9.7 pivot 47.04 BO 2026-10-13  start 2026-05-20 len 85
+HGTY RS86 29.5 > 9.5 > 6.6 pivot 13.93 BO 2026-09-15  start 2026-01-09 len 163
+S RS86 17.2 > 13.9 > 10.1 pivot 24.25 BO 2026-10-01  start 2026-08-14 len 30
+AMGN RS85 16.0 > 7.2 pivot 426.59 BO 2026-10-15  start 2026-09-03 len 22
+SHOP RS85 41.6 > 9.7 pivot 180.88 forming  start 2025-11-28 len 220
+LLY RS84 13.9 > 6.9 pivot 1215 BO 2026-10-15  start 2026-08-19 len 35
+ADI RS84 22.0 > 6.7 pivot 422.67 forming vdry start 2026-06-22 len 81
+IFF RS84 9.5 > 6.7 > 4.8 pivot 85.61 BO 2026-10-13  start 2026-08-05 len 40
+SAIC RS84 14.9 > 5.3 pivot 136.4 forming  start 2026-08-31 len 31
+MSGS RS84 14.3 > 9.2 > 5.5 pivot 412.1 forming  start 2026-08-13 len 45
+BWFG RS84 8.8 > 5.3 > 4.7 > 3.4 pivot 66.69 forming vdry start 2026-08-14 len 42
+FLYW RS84 14.3 > 9.5 > 5.6 pivot 18.8 BO 2026-10-15 vdry start 2026-08-24 len 36
+KYMR RS84 17.3 > 9.9 pivot 115.82 forming  start 2026-09-23 len 17
+OSPN RS84 18.5 > 5.7 > 4.5 pivot 18.05 forming  start 2026-08-05 len 51
+BBY RS83 15.0 > 4.5 pivot 90.82 BO 2026-09-14 vdry start 2026-08-19 len 15
+RS RS83 12.3 > 6.7 pivot 407.64 BO 2026-10-05 vdry start 2026-08-11 len 36
+FCBC RS83 10.3 > 3.5 pivot 47.9 BO 2026-10-02 vdry start 2026-08-24 len 27
+TECK RS83 13.0 > 7.8 > 6.7 pivot 67.76 forming vdry start 2026-09-08 len 27
+PLTR RS82 43.2 > 12.6 > 5.1 pivot 194.68 BO 2026-10-08 vdry start 2026-01-07 len 182
+MOG-A RS82 22.1 > 11.3 pivot 399.45 forming  start 2026-08-17 len 37
+GGB RS82 19.3 > 10.4 pivot 5.17 BO 2026-10-13  start 2026-08-05 len 38
+SDRL RS82 32.7 > 10.8 pivot 48.95 BO 2026-10-13 vdry start 2026-05-20 len 93
+STNG RS82 11.2 > 5.6 pivot 86.94 forming  start 2026-09-17 len 21
+NEU RS81 15.1 > 4.8 pivot 915.07 forming  start 2026-08-17 len 43
+III RS81 39.0 > 4.1 pivot 5.9 forming vdry start 2026-01-16 len 182
+SMBK RS81 8.1 > 4.2 pivot 51.47 forming vdry start 2026-09-14 len 22
+WAB RS80 11.0 > 4.4 pivot 293.95 forming  start 2026-07-29 len 45
+CROX RS80 23.2 > 9.1 pivot 125.57 forming  start 2026-08-04 len 46
+WCC RS80 19.2 > 14.9 > 9.6 pivot 365.48 BO 2026-09-23 vdry start 2026-06-22 len 59
+BGR RS80 14.2 > 5.7 > 4.8 > 3.8 pivot 17.55 BO 2026-10-09 vdry start 2026-05-20 len 85
+HMC RS80 32.5 > 7.2 pivot 33.45 BO 2026-10-15 vdry start 2025-09-17 len 244
+HG RS79 11.0 > 3.3 pivot 35.52 BO 2026-10-16 vdry start 2026-09-11 len 23
+PFIS RS79 10.7 > 4.6 pivot 69.82 forming  start 2026-07-29 len 54
+ELV RS78 16.8 > 6.8 pivot 403.33 BO 2026-10-07 vdry start 2026-07-14 len 56
+RHP RS78 16.9 > 7.2 pivot 127.15 forming vdry start 2026-07-29 len 45
+RLGT RS78 17.3 > 7.5 pivot 9.55 forming vdry start 2026-09-15 len 21
+EBAY RS77 13.3 > 7.9 pivot 113.63 BO 2026-10-12  start 2026-08-07 len 37
+AMPH RS77 43.0 > 10.0 pivot 27.8 forming  start 2026-02-17 len 160
+DSP RS77 30.3 > 8.1 pivot 13.52 forming  start 2026-08-28 len 33
+PLGO RS77 20.2 > 9.4 pivot 25.88 forming vdry start 2026-08-06 len 33
+M RS76 25.6 > 9.2 pivot 23.63 BO 2026-10-15  start 2026-08-04 len 45
+JXN RS76 12.0 > 5.9 > 5.0 pivot 135.55 forming vdry start 2026-09-11 len 20
+MANE RS76 20.5 > 10.8 pivot 122 BO 2026-10-08 vdry start 2026-07-24 len 51
+SBS RS76 37.8 > 8.7 pivot 6.79 forming  start 2026-04-21 len 123
+EMR RS75 12.6 > 5.1 pivot 152.09 BO 2026-09-22  start 2026-06-18 len 61
+ONC RS75 11.1 > 4.4 pivot 356 BO 2026-10-15  start 2026-08-19 len 35
+PANL RS74 23.7 > 9.3 pivot 8.39 forming vdry start 2026-05-26 len 100
+CRBG RS73 34.5 > 9.2 > 7.3 > 5.2 pivot 35.57 forming vdry start 2025-09-23 len 263
+FCFS RS73 16.8 > 11.2 > 8.5 > 7.5 pivot 223.13 forming vdry start 2026-07-07 len 61
+MEDP RS73 16.9 > 8.3 > 4.6 pivot 637.65 forming vdry start 2026-07-23 len 46
+AUPH RS73 25.4 > 11.0 > 9.8 > 5.1 pivot 16.97 forming vdry start 2026-06-24 len 78
+UNM RS72 11.3 > 4.6 pivot 93.89 forming  start 2026-09-04 len 27
+ALRM RS72 22.1 > 8.9 > 7.2 pivot 56.17 BO 2026-10-05  start 2025-12-11 len 194
+AME RS71 12.1 > 2.6 pivot 248.58 forming  start 2026-08-13 len 44
+CLH RS71 9.7 > 6.3 > 5.4 pivot 325.92 forming vdry start 2026-07-29 len 45
+VOYA RS71 13.1 > 6.8 pivot 99.53 forming  start 2026-09-03 len 29
+LUXE RS71 42.5 > 12.4 > 10.9 pivot 10.23 forming vdry start 2026-02-12 len 169
+PAGS RS71 25.7 > 7.4 pivot 11.19 forming  start 2026-04-08 len 127
+POWW RS71 21.3 > 11.3 pivot 2.39 forming vdry start 2026-08-10 len 48
+AIT RS70 16.7 > 6.9 pivot 352.01 forming vdry start 2026-08-13 len 44
+SHOO RS70 18.8 > 6.7 pivot 46.67 forming  start 2026-08-06 len 45
+SPNT RS70 15.6 > 5.4 pivot 25.08 BO 2026-09-21  start 2026-07-28 len 30
+DHR RS69 33.7 > 9.8 > 7.5 pivot 228.38 BO 2026-10-15  start 2026-01-22 len 174
+IOT RS69 19.3 > 9.3 > 8.6 pivot 43.12 forming vdry start 2026-09-04 len 29
+VLGEA RS69 21.5 > 8.7 pivot 46.8 forming vdry start 2026-05-28 len 90
+CTAS RS68 22.9 > 8.9 pivot 209.72 BO 2026-10-15  start 2026-03-05 len 140
+MTUS RS68 19.5 > 8.6 pivot 21.36 forming  start 2026-08-05 len 46
+FUNC RS67 10.2 > 4.2 pivot 44.62 BO 2026-09-15  start 2026-08-13 len 19
+EG RS66 10.1 > 6.8 > 5.7 pivot 383.04 BO 2026-10-16  start 2026-07-28 len 50
+NOV RS66 17.7 > 12.7 > 7.7 pivot 19.76 forming vdry start 2026-06-04 len 92
+META RS65 31.5 > 8.7 pivot 779.82 forming  start 2025-10-29 len 236
+GRVY RS65 16.6 > 6.5 pivot 70.62 forming  start 2026-06-22 len 66
+UTHR RS63 19.2 > 10.6 pivot 585.79 forming  start 2026-05-27 len 97
+USPH RS63 31.2 > 8.0 pivot 83.07 BO 2026-09-16  start 2026-03-02 len 135
+IMMR RS63 31.5 > 12.5 > 8.4 pivot 7.61 forming  start 2025-07-24 len 308
+KINS RS63 16.7 > 5.2 pivot 19.21 forming vdry start 2026-08-06 len 48
+NWS RS62 25.2 > 12.0 pivot 35.31 forming  start 2025-09-08 len 268
+CIG RS62 32.2 > 7.0 pivot 2.44 forming  start 2026-04-14 len 128
+SUNB RS62 21.1 > 8.7 pivot 77.57 BO 2026-10-06  start 2026-08-11 len 25
+ISTR RS60 9.3 > 4.2 pivot 29.67 forming vdry start 2026-09-14 len 22
+TT RS59 16.2 > 7.6 pivot 484.13 forming  start 2026-08-12 len 45
+GTES RS58 20.0 > 11.5 pivot 28.54 forming  start 2026-08-04 len 49
+ESEA RS58 20.0 > 11.2 > 9.3 pivot 72.89 forming vdry start 2026-05-21 len 102
+TRS RS58 21.9 > 8.3 > 6.5 pivot 40.48 forming vdry start 2026-07-01 len 71
+AMCR RS57 28.8 > 10.1 pivot 45.39 forming vdry start 2026-02-24 len 157
+AER RS57 13.9 > 5.5 pivot 149.92 forming  start 2026-08-05 len 40
+CR RS54 15.6 > 6.3 pivot 213.35 forming  start 2026-07-27 len 52
+FSUN RS54 18.4 > 7.5 pivot 40.61 forming  start 2026-07-02 len 72
+CPK RS53 13.5 > 11.2 > 7.9 pivot 135 forming  start 2025-11-21 len 214
+LYG RS53 12.5 > 7.4 pivot 5.78 forming  start 2026-04-17 len 115
+LNC RS51 25.3 > 9.7 pivot 43.06 forming vdry start 2026-02-03 len 166
+GAIN RS50 15.3 > 6.7 > 6.2 > 5.6 pivot 15.99 forming vdry start 2026-05-06 len 106
+PCYO RS50 21.6 > 11.9 > 4.4 pivot 11.44 forming  start 2026-05-11 len 87
+MGRC RS45 22.9 > 17.7 > 11.5 > 10.9 pivot 122.06 forming  start 2025-10-22 len 217
+TEL RS43 23.3 > 15.0 > 7.3 pivot 223.52 forming vdry start 2026-04-21 len 123
