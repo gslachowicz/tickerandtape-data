@@ -1,9 +1,12 @@
 name: tmp CIK lookup
 on: workflow_dispatch
+permissions:
+  contents: write
 jobs:
   look:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: |
           cat > l.py <<'PY'
           import requests, time, json, re
@@ -38,4 +41,6 @@ jobs:
               print(code,"|",q,"|"," || ".join(out) or "NONE")
               time.sleep(0.2)
           PY
-          python l.py
+          python l.py > cik.txt
+          git config user.name bot; git config user.email bot@users.noreply.github.com
+          git checkout --orphan tmp-cik; git rm -rq --cached . ; git add cik.txt; git commit -qm cik; git push -f origin tmp-cik
