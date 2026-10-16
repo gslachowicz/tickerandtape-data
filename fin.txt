@@ -1,0 +1,28 @@
+AAPL src=gaap FY=2025-09-27 q=20 new have 28/51
+  missing: sellingMarketing restructuring impairment interestIncome equityIncome discontinued minorityIncome prefDividends accrued deferredRevenueNc deferredTaxLiab apic treasuryStock minorityInterest totalEquity deferredTaxCf impairmentCf chgDeferredRev chgWorkingCapital assetSales stockIssued fxEffect interestPaid
+  revenue=416161000000 netIncome=112010000000 cfo=111482000000 capex=-12715000000 fcf=98767000000 chgReceivables=-6682000000 chgInventory=1400000000 chgPayables=902000000 debtRepaid=-10932000000 debtIssued=4481000000 invPurchases=-24407000000 invSales=40907000000 netChangeCash=5991000000 totalAssets=359241000000 liabEquity=359241000000 totalEquity=None equity=73733000000 noncurrentAssets=49834000000
+  cf check: sum=5991000000 net=5991000000
+MSFT src=gaap FY=2026-06-30 q=20 new have 31/51
+  missing: restructuring impairment interestIncome equityIncome discontinued minorityIncome prefDividends deferredTaxAssets leaseLiabCurrent noncurrentLiabilities apic treasuryStock minorityInterest totalEquity impairmentCf chgWorkingCapital assetSales debtIssued debtRepaid fxEffect
+  revenue=331839000000 netIncome=133749000000 cfo=182935000000 capex=-115948000000 fcf=66987000000 chgReceivables=-12737000000 chgInventory=-461000000 chgPayables=5268000000 debtRepaid=None debtIssued=None invPurchases=-58351000000 invSales=34605000000 netChangeCash=-9307000000 totalAssets=758376000000 liabEquity=758376000000 totalEquity=None equity=442387000000 noncurrentAssets=475513000000
+  cf check: sum=-9111000000 net=-9307000000
+JPM src=gaap FY=2025-12-31 q=20 new have 18/51
+  missing: gna restructuring impairment otherNonOp equityIncome discontinued minorityIncome otherCurrentAssets longInvestments deferredTaxAssets otherNoncurrentAssets noncurrentAssets accrued deferredRevenue leaseLiabCurrent otherCurrentLiab deferredRevenueNc leaseLiab deferredTaxLiab otherNoncurrentLiab noncurrentLiabilities minorityInterest totalEquity impairmentCf chgReceivables chgInventory chgPayables chgDeferredRev chgWorkingCapital assetSales debtIssued debtRepaid stockIssued
+  revenue=182447000000 netIncome=57048000000 cfo=-147782000000 capex=None fcf=None chgReceivables=None chgInventory=None chgPayables=None debtRepaid=None debtIssued=None invPurchases=-308772000000 invSales=37414000000 netChangeCash=-125979000000 totalAssets=4424900000000 liabEquity=4424900000000 totalEquity=None equity=362438000000 noncurrentAssets=None
+  cf check: sum=-125979000000 net=-125979000000
+KO src=gaap FY=2025-12-31 q=20 new have 37/51
+  missing: gna restructuring discontinued prefDividends noncurrentAssets accrued deferredRevenue otherCurrentLiab deferredRevenueNc noncurrentLiabilities chgDeferredRev invPurchases invSales debtRepaid
+  revenue=47941000000 netIncome=13107000000 cfo=7408000000 capex=-2112000000 fcf=5296000000 chgReceivables=334000000 chgInventory=-154000000 chgPayables=-6612000000 debtRepaid=None debtIssued=4980000000 invPurchases=None invSales=None netChangeCash=-478000000 totalAssets=104816000000 liabEquity=104816000000 totalEquity=34275000000 equity=32169000000 noncurrentAssets=None
+  cf check: sum=-478000000 net=-478000000
+NVDA src=gaap FY=2026-01-25 q=20 new have 30/51
+  missing: sellingMarketing gna restructuring equityIncome discontinued minorityIncome prefDividends longInvestments otherCurrentLiab noncurrentLiabilities treasuryStock minorityInterest totalEquity impairmentCf chgDeferredRev chgWorkingCapital assetSales debtIssued stockIssued fxEffect interestPaid
+  revenue=215938000000 netIncome=120067000000 cfo=102718000000 capex=-6042000000 fcf=96676000000 chgReceivables=-15399000000 chgInventory=-11324000000 chgPayables=3096000000 debtRepaid=-0.0 debtIssued=None invPurchases=-40616000000 invSales=11226000000 netChangeCash=2016000000 totalAssets=206803000000 liabEquity=206803000000 totalEquity=None equity=157293000000 noncurrentAssets=10383000000
+  cf check: sum=2016000000 net=2016000000
+TSM src=ifrs FY=2024-12-31 q=0 new have 26/51
+  missing: sellingMarketing gna restructuring impairment equityIncome discontinued prefDividends dps longInvestments accrued deferredRevenue otherCurrentLiab deferredRevenueNc apic treasuryStock aoci impairmentCf chgReceivables chgInventory chgPayables chgDeferredRev chgWorkingCapital invPurchases invSales taxesPaid
+  revenue=2894307700000 netIncome=1158380200000 cfo=1826177100000 capex=-956006500000 fcf=870170600000 chgReceivables=None chgInventory=None chgPayables=None debtRepaid=-2295600000 debtIssued=30897000000 invPurchases=None invSales=None netChangeCash=662199200000 totalAssets=6691764700000 liabEquity=6691764700000 totalEquity=4279271600000 equity=4279271600000 noncurrentAssets=3603412600000
+  cf check: sum=662199200000 net=662199200000
+AMZN src=gaap FY=2025-12-31 q=20 new have 30/51
+  missing: restructuring impairment discontinued minorityIncome prefDividends dps deferredTaxAssets noncurrentAssets otherCurrentLiab deferredTaxLiab noncurrentLiabilities minorityInterest totalEquity impairmentCf chgReceivables chgWorkingCapital assetSales debtRepaid stockIssued fxEffect interestPaid
+  revenue=716924000000 netIncome=77670000000 cfo=139514000000 capex=-131819000000 fcf=7695000000 chgReceivables=None chgInventory=-3002000000 chgPayables=11231000000 debtRepaid=None debtIssued=15673000000 invPurchases=-54770000000 invSales=44386000000 netChangeCash=7794000000 totalAssets=818042000000 liabEquity=818042000000 totalEquity=None equity=411065000000 noncurrentAssets=None
+  cf check: sum=6630000000 net=7794000000
